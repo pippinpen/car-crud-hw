@@ -83,7 +83,8 @@ export const CarsProvider = (props) => {
   };
 
   const updateCar = async (id, updates) => {
-    let newCar = null;
+    console.log('updating', id, updates);
+    let updatedCar = null;
     try {
       const response = await fetch(`${CARS_ENDPOINT}${id}`, {
         method: "PUT",
@@ -98,31 +99,34 @@ export const CarsProvider = (props) => {
       }
       // Get index
       const index = cars.findIndex((car) => car._id === id);
+      console.log(index)
 
       // Get actual car
       const oldCar = cars[index];
+      console.log('oldCar', oldCar);
 
       // Merge with updates
-      newCar = {
+      updatedCar = {
         // legit use of 'var', so can be seen in catch block
         ...oldCar,
         ...updates, // order here is important for the override!!
       };
+      console.log('updatedCar', updatedCar);
       // recreate the cars array
       const updatedCars = [
         ...cars.slice(0, index),
-        newCar,
+        updatedCar,
         ...cars.slice(index + 1),
       ];
       localStorage.setItem('cars', JSON.stringify(updatedCars));
-      setCars(updatedCars);
-      addToast(`Updated ${newCar.name}`, {
+      addToast(`Updated ${updatedCar.name}`, {
         appearance: "success",
       });
+      setCars(updatedCars);
     } catch (err) {
       console.log(err);
       addToast(
-        `Error: Failed to update ${newCar.firstName} ${newCar.lastName}`,
+        `Error: Failed to update ${updatedCar.name}`,
         {
           appearance: "error",
         }

@@ -31,7 +31,11 @@ export default function CarForm() {
   let submitHandler = () => {};
 
   if(id){
-    submitHandler = updateCar;
+    submitHandler = (vals, e) => {
+      console.log('update vals', vals);
+      e.preventDefault();
+      updateCar(id, vals);
+    };
     const carToBeUpdated = cars.find(({_id}) => _id === id);
     if(!carToBeUpdated) {
       throw new Error(`Could not find car with id: ${id} to be updated`)
@@ -39,7 +43,11 @@ export default function CarForm() {
       defaultValues = carToBeUpdated;
     }
   } else {
-    submitHandler = addCar;
+    submitHandler = (vals, e) => {
+      console.log('add vals', vals);
+      e.preventDefault();
+      addCar(vals);
+    };
   }
 
   const { register, handleSubmit, errors, reset, formState } = useForm({
