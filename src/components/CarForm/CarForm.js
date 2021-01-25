@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
 import { useParams, useHistory } from 'react-router-dom';
+// import { useToasts } from "react-toast-notifications";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import "./CarForm.css";
 
 import { CarsContext } from "./../../contexts/CarsContext";
+
 
 const schema = yup.object().shape({
   name: yup.string().required(),
@@ -14,13 +16,10 @@ const schema = yup.object().shape({
 });
 
 export default function CarForm() {
-  const { addCar, updateCar, cars } = useContext(CarsContext);
   let { id } = useParams();
-  let history = useHistory();
-
-  if (id && !cars.length) {
-    history.push("/");
-  }
+  // const { addToast } = useToasts();
+  const { addCar, updateCar, cars } = useContext(CarsContext);
+  const carToBeUpdated = cars.find(({_id}) => _id === id);
 
   let defaultValues = {
     _id: '',
@@ -36,11 +35,11 @@ export default function CarForm() {
       e.preventDefault();
       updateCar(id, vals);
     };
-    const carToBeUpdated = cars.find(({_id}) => _id === id);
-    if(!carToBeUpdated) {
-      throw new Error(`Could not find car with id: ${id} to be updated`)
-    } else {
+    // Do something
+    if(carToBeUpdated) {
       defaultValues = carToBeUpdated;
+    } else {
+      throw new Error(`Couldn't find car with id ${id}`);
     }
   } else {
     submitHandler = (vals, e) => {
