@@ -2,8 +2,9 @@ import react, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./CarsList.css";
 import { CarsContext } from "./../../contexts/CarsContext";
+import Loading from './../Loading/Loading';
 
-function CarsList({ headingLevel = "h1" }) {
+function CarsList() {
   const {
     fetchCars,
     deleteCar,
@@ -22,7 +23,7 @@ function CarsList({ headingLevel = "h1" }) {
     <section className="cars-list-section">
       <div className="container">
         <h1 className="section-heading">Cars List</h1>
-        {loading && <p>Loading...</p>}
+        <Loading show={loading} />
         {error && <p>{error}</p>}
         {cars.length ? (
           <ul className="cars-list">
@@ -32,8 +33,8 @@ function CarsList({ headingLevel = "h1" }) {
                 <p>
                   {name} ({bhp} bhp)
                 </p>
-                <Link to={`/cars/update/${_id}`}>Update</Link>
-                <button onClick={() => deleteCar(_id)}>&times;</button>
+                <Link to={`/cars/update/${_id}`} className="update-link">Update</Link>
+                <button onClick={() => deleteCar(_id)} className="delete-btn">Delete</button>
               </li>
             ))}
           </ul>

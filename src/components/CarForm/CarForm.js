@@ -17,6 +17,7 @@ const schema = yup.object().shape({
 
 export default function CarForm() {
   let { id } = useParams();
+  let history = useHistory();
   // const { addToast } = useToasts();
   const { addCar, updateCar, cars } = useContext(CarsContext);
   const carToBeUpdated = cars.find(({_id}) => _id === id);
@@ -29,11 +30,20 @@ export default function CarForm() {
   };
   let submitHandler = () => {};
 
+
+
   if(id){
     submitHandler = (vals, e) => {
       console.log('update vals', vals);
       e.preventDefault();
+      // reset({
+      //   _id: '',
+      //   name: '',
+      //   bhp: '',
+      //   avatar_url: ''
+      // });
       updateCar(id, vals);
+      history.push('/');
     };
     // Do something
     if(carToBeUpdated) {
@@ -45,6 +55,7 @@ export default function CarForm() {
     submitHandler = (vals, e) => {
       console.log('add vals', vals);
       e.preventDefault();
+      reset(defaultValues);
       addCar(vals);
     };
   }
@@ -109,8 +120,8 @@ export default function CarForm() {
       {/* <p>{`${!isValid && isDirty}`}</p>
       <p>Valid: {`${isValid}`}</p>
       <p>Dirty: {`${isDirty}`}</p>
-      <p>Submitting: {`${isSubmitting}`}</p> */}
-      {/* <p>{JSON.stringify(errors)}</p> */}
+      <p>Submitting: {`${isSubmitting}`}</p>
+      <p>{JSON.stringify(errors)}</p> */}
         <button type="reset" onClick={reset}>
           Reset
         </button>
