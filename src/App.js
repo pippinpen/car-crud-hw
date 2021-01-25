@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+// import logo from "./logo.svg";
+import "./App.css";
+
+import {
+  BrowserRouter as Router,
+  Route,
+  // Redirect,
+  Switch,
+} from "react-router-dom";
+
+import { ToastProvider } from "react-toast-notifications";
+import { CarsProvider } from "./contexts/CarsContext";
+
+import Home from "./pages/Home/Home";
+import AddCar from "./pages/AddCar/AddCar";
+import UpdateCar from "./pages/UpdateCar/UpdateCar";
+import NotFound from "./pages/NotFound/NotFound";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <ToastProvider autoDismiss={true}>
+        <CarsProvider>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path={`/cars/add`} component={AddCar} />
+            <Route exact path={`/cars/update/:id`} component={UpdateCar} />
+            <Route path="*" component={NotFound} />
+          </Switch>
+        </CarsProvider>
+      </ToastProvider>
+    </Router>
   );
 }
 

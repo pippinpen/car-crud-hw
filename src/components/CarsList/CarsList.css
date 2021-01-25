@@ -1,0 +1,25 @@
+.cars-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+}
+
+@media screen and (min-width: 768px) {
+.container {
+  width: 80%;
+  margin: auto;
+}
+}
+
+.cars-list-item {
+  padding: 15px;
+  border: 2px solid #000;
+  border-radius: 5px;
+  margin-block-end: 15px;
+  margin-inline-end: 15px;
+}
+
+.section-heading {
+  margin-inline-start: 15px;
+}
