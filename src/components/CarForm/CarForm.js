@@ -35,7 +35,6 @@ export default function CarForm() {
   if(id){
     submitHandler = (vals, e) => {
       console.log('update vals', vals);
-      e.preventDefault();
       // reset({
       //   _id: '',
       //   name: '',
@@ -54,7 +53,6 @@ export default function CarForm() {
   } else {
     submitHandler = (vals, e) => {
       console.log('add vals', vals);
-      e.preventDefault();
       reset(defaultValues);
       addCar(vals);
     };
