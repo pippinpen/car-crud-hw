@@ -48,7 +48,7 @@ export const CarsProvider = (props) => {
       setError(err.message || err.statusText);
     } finally {
       setLoading(false);
-      setLoaded("true");
+      setLoaded(true);
     }
   };
 
