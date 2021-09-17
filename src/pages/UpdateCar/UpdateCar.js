@@ -15,7 +15,6 @@ function UpdateCar() {
   const { addToast } = useToasts();
   const carToBeUpdated = cars.find(({ _id }) => _id === id);
 
-  // More aggressive option
   if (!carToBeUpdated) {
     addToast(`Error: cannot find car with id ${id}. Redirecting...`, {
       appearance: "error",
