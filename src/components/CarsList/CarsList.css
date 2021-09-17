@@ -1,8 +1,6 @@
 .cars-list {
   list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0;
+  padding: 0 15px;
 }
 
 .cars-list-item {
@@ -10,9 +8,19 @@
   border: 2px solid #000;
   border-radius: 5px;
   margin-block-end: 15px;
-  margin-inline-end: 15px;
-  flex-basis: 33.33%;
   text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .cars-list {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+  }
+  .cars-list-item {
+    flex-basis: 33.33%;
+    margin-inline-end: 15px;
+  }
 }
 
 .avatar {
