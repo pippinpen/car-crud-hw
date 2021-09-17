@@ -1,4 +1,4 @@
-import react from "react";
+import React from "react";
 import CarForm from "./../../components/CarForm/CarForm";
 import ErrorBoundary  from "./../../components/ErrorBoundary/ErrorBoundary";
 import MainLayout  from '../../layouts/MainLayout';

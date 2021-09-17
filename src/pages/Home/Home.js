@@ -1,4 +1,4 @@
-import react from 'react';
+import React from 'react';
 import CarsList from './../../components/CarsList/CarsList';
 import MainLayout  from '../../layouts/MainLayout';
 
