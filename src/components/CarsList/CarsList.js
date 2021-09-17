@@ -28,7 +28,7 @@ function CarsList() {
           <ul className="cars-list">
             {cars.map(({ _id, name, bhp, avatar_url }) => (
               <li key={_id} className="cars-list-item">
-                <img width="200" src={avatar_url} alt={name} />
+                <img src={avatar_url} alt={name} className="avatar" />
                 <p>
                   {name} ({bhp} bhp)
                 </p>
