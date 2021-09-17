@@ -13,6 +13,8 @@ export const CarsContext = createContext({
   cars: [],
 });
 
+
+
 export const CarsProvider = (props) => {
   const [cars, setCars] = useState(() => {
     return JSON.parse(localStorage.getItem('cars')) || [];
@@ -71,9 +73,9 @@ export const CarsProvider = (props) => {
       const newCars = [...cars, savedCar];
       localStorage.setItem('cars', JSON.stringify(newCars));
       setCars(newCars);
-      addToast(`Saved ${savedCar.name}`, {
-        appearance: "success",
-      });
+      // addToast(`Saved ${savedCar.name}`, {
+      //   appearance: "success",
+      // });
     } catch (err) {
       console.log(err);
       addToast(`Error ${err.message || err.statusText}`, {
@@ -119,9 +121,9 @@ export const CarsProvider = (props) => {
         ...cars.slice(index + 1),
       ];
       localStorage.setItem('cars', JSON.stringify(updatedCars));
-      addToast(`Updated ${updatedCar.name}`, {
-        appearance: "success",
-      });
+      // addToast(`Updated ${updatedCar.name}`, {
+      //   appearance: "success",
+      // });
       setCars(updatedCars);
     } catch (err) {
       console.log(err);
@@ -154,9 +156,10 @@ export const CarsProvider = (props) => {
       const updatedCars = [...cars.slice(0, index), ...cars.slice(index + 1)];
       localStorage.setItem('cars', JSON.stringify(updatedCars));
       setCars(updatedCars);
-      addToast(`Deleted ${deletedCar.name}`, {
-        appearance: "success",
-      });
+      console.log(`Deleted ${deletedCar.name}`);
+      // addToast(`Deleted ${deletedCar.name}`, {
+      //   appearance: "success",
+      // });
     } catch (err) {
       console.log(err);
       addToast(

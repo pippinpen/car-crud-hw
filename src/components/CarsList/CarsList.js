@@ -2,20 +2,18 @@ import react, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./CarsList.css";
 import { CarsContext } from "./../../contexts/CarsContext";
-import Loading from './../Loading/Loading';
+// import Loading from './../Loading/Loading';
 
 function CarsList() {
   const {
     fetchCars,
     deleteCar,
-    // loaded,
     loading,
     error,
     cars,
   } = useContext(CarsContext);
 
   useEffect(() => {
-    // if(loading || loaded) return;
     fetchCars();
   }, [fetchCars]);
 
@@ -23,9 +21,10 @@ function CarsList() {
     <section className="cars-list-section">
       <div className="container">
         <h1 className="section-heading">Cars List</h1>
-        <Loading show={loading} />
+        {/* <Loading show={loading} /> */}
+        {loading && <p>Loading ...</p>}
         {error && <p>{error}</p>}
-        {cars.length ? (
+        {cars?.length ? (
           <ul className="cars-list">
             {cars.map(({ _id, name, bhp, avatar_url }) => (
               <li key={_id} className="cars-list-item">
@@ -38,7 +37,7 @@ function CarsList() {
               </li>
             ))}
           </ul>
-        ) : null}
+        ) : <p>No cars to display</p>}
       </div>
     </section>
   );

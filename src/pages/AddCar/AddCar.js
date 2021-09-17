@@ -1,18 +1,18 @@
 import react from "react";
-import Header from "./../../components/Header/Header";
 import CarForm from "./../../components/CarForm/CarForm";
+import ErrorBoundary  from "./../../components/ErrorBoundary/ErrorBoundary";
+import MainLayout  from '../../layouts/MainLayout';
 
 function AddCar() {
   return (
-    <div className="page">
-      <Header />
-      <main>
+    <MainLayout>
         <h1 style={{
           marginInlineStart: '15px',
         }}>AddCar</h1>
-        <CarForm />
-      </main>
-    </div>
+        <ErrorBoundary>
+          <CarForm />
+        </ErrorBoundary>
+    </MainLayout>
   );
 }
 

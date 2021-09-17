@@ -1,12 +1,11 @@
 import react from "react";
-import Header from "./../../components/Header/Header";
+import MainLayout  from '../../layouts/MainLayout';
 
 function NotFound() {
   return (
-    <div className="page">
-      <Header />
+    <MainLayout>
       <p>Not Found</p>
-    </div>
+    </MainLayout>
   );
 }
 

@@ -5,13 +5,6 @@
   padding: 0;
 }
 
-@media screen and (min-width: 768px) {
-.container {
-  width: 80%;
-  margin: auto;
-}
-}
-
 .cars-list-item {
   padding: 15px;
   border: 2px solid #000;

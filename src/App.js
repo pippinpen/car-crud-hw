@@ -12,6 +12,7 @@ import { ToastProvider } from "react-toast-notifications";
 import { CarsProvider } from "./contexts/CarsContext";
 
 import Home from "./pages/Home/Home";
+import Spectators from "./pages/Spectators/Spectators";
 import AddCar from "./pages/AddCar/AddCar";
 import UpdateCar from "./pages/UpdateCar/UpdateCar";
 import NotFound from "./pages/NotFound/NotFound";
@@ -23,8 +24,9 @@ function App() {
         <CarsProvider>
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route exact path={`/cars/add`} component={AddCar} />
-            <Route exact path={`/cars/update/:id`} component={UpdateCar} />
+            <Route path={`/cars/add`} component={AddCar} />
+            <Route path={`/cars/update/:id`} component={UpdateCar} />
+            <Route path="/spectators" component={Spectators} />
             <Route path="*" component={NotFound} />
           </Switch>
         </CarsProvider>
