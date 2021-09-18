@@ -18,8 +18,11 @@
     padding: 0;
   }
   .cars-list-item {
-    flex-basis: 33.33%;
+    flex-basis: calc(33.33% - 10px);
     margin-inline-end: 15px;
+  }
+  .cars-list-item:nth-child(3n) {
+    margin-inline-end: 0;
   }
 }
 
