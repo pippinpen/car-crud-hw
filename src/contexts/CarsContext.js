@@ -84,9 +84,27 @@ export const CarsProvider = (props) => {
     }
   };
 
-  const updateCar = async (id, updates) => {
-    console.log('updating', id, updates);
+  const updateCar = async (id, formData) => {
+    console.log('updating', id, formData);
     let updatedCar = null;
+      // Get index
+      const index = cars.findIndex((car) => car._id === id);
+      console.log(index)
+      if (index === -1) throw new Error(`Car with index ${id} not found`);
+      // Get actual car
+      const oldCar = cars[index];
+      console.log('oldCar', oldCar);
+
+      // Send the differences, not the whole update
+      const updates = {};
+
+      for (const key of Object.keys(oldCar)) {
+        if (key === '_id') continue
+        if(oldCar[key] !== formData[key]) {
+          updates[key] = formData[key]
+        }
+      }
+
     try {
       const response = await fetch(`${CARS_ENDPOINT}${id}`, {
         method: "PUT",
@@ -96,22 +114,15 @@ export const CarsProvider = (props) => {
         },
         body: JSON.stringify(updates),
       });
+
       if (response.status !== 200) {
         throw response;
       }
-      // Get index
-      const index = cars.findIndex((car) => car._id === id);
-      console.log(index)
 
-      // Get actual car
-      const oldCar = cars[index];
-      console.log('oldCar', oldCar);
-
-      // Merge with updates
+      // Merge with formData
       updatedCar = {
-        // legit use of 'var', so can be seen in catch block
         ...oldCar,
-        ...updates, // order here is important for the override!!
+        ...formData, // order here is important for the override!!
       };
       console.log('updatedCar', updatedCar);
       // recreate the cars array
@@ -128,7 +139,7 @@ export const CarsProvider = (props) => {
     } catch (err) {
       console.log(err);
       addToast(
-        `Error: Failed to update ${updatedCar.name}`,
+        `Error: Failed to update ${oldCar.name}`,
         {
           appearance: "error",
         }
