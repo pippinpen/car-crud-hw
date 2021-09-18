@@ -14,7 +14,6 @@ const schema = yup.object().shape({
 });
 
 let defaultValues = {
-  _id: "",
   name: "",
   bhp: "",
   avatar_url: "",

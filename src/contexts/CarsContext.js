@@ -56,9 +56,6 @@ export const CarsProvider = (props) => {
 
   const addCar = async (formData) => {
     console.log('about to add', formData);
-    if('_id' in formData) {
-      delete formData._id;
-    }
     try {
       const response = await fetch(CARS_ENDPOINT, {
         method: "POST",
