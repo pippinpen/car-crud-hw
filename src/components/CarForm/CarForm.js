@@ -107,7 +107,7 @@ export default function CarForm({ car }) {
         <p>Valid: {`${isValid}`}</p>
         <p>Dirty: {`${isDirty}`}</p>
         <p>Submitting: {`${isSubmitting}`}</p> */}
-        <button type="reset" onClick={reset}>
+        <button type="reset" onClick={() => reset()}>
           Reset
         </button>
         <button type="submit" disabled={isSubmitting || (!isValid || !isDirty)}>
