@@ -22,7 +22,7 @@ function Spectators() {
     <MainLayout>
     <h1>Spectators</h1>
     <ul>
-      {spectators.map(({firstName, lastName, email}) => <li>{lastName}, {firstName} ({email})</li>)}
+      {spectators.map(({firstName, lastName, email}) => <li> {firstName} {lastName} ({email})</li>)}
     </ul>
     </MainLayout>
   );

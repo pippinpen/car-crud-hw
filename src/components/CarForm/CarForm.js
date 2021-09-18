@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
-import { useHistory } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import "./CarForm.css";
+import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import './CarForm.css';
 
-import { CarsContext } from "./../../contexts/CarsContext";
+import { CarsContext } from './../../contexts/CarsContext';
 
 const schema = yup.object().shape({
   name: yup.string().required(),
@@ -14,10 +14,10 @@ const schema = yup.object().shape({
 });
 
 let defaultValues = {
-  _id: "",
-  name: "",
-  bhp: "",
-  avatar_url: "",
+  _id: '',
+  name: '',
+  bhp: '',
+  avatar_url: '',
 };
 
 export default function CarForm({ car }) {
@@ -28,14 +28,14 @@ export default function CarForm({ car }) {
 
   if (car) {
     submitHandler = (vals, e) => {
-      console.log("update vals", vals);
+      console.log('update vals', vals);
       updateCar(car._id, vals);
-      history.push("/"); // don't need to reset form because unmounting...
+      history.push('/'); // don't need to reset form because unmounting...
     };
     // Do something
   } else {
     submitHandler = (vals, e) => {
-      console.log("add vals", vals);
+      console.log('add vals', vals);
       reset(defaultValues);
       addCar(vals);
     };
@@ -43,7 +43,7 @@ export default function CarForm({ car }) {
 
   const { register, handleSubmit, reset, formState } = useForm({
     resolver: yupResolver(schema),
-    mode: "onChange",
+    mode: 'onChange',
     defaultValues: car || defaultValues,
   });
 
@@ -59,8 +59,8 @@ export default function CarForm({ car }) {
           id="name"
           type="text"
           name="name"
-          {...register("name")}
-          aria-invalid={errors.name ? "true" : "false"}
+          {...register('name')}
+          aria-invalid={errors.name ? 'true' : 'false'}
         />
         {errors.name && (
           <label htmlFor="name" role="alert" className="error">
@@ -76,8 +76,8 @@ export default function CarForm({ car }) {
           id="bhp"
           type="text"
           name="bhp"
-          {...register("bhp")}
-          aria-invalid={errors.bhp ? "true" : "false"}
+          {...register('bhp')}
+          aria-invalid={errors.bhp ? 'true' : 'false'}
         />
         {errors.bhp && (
           <label htmlFor="bhp" role="alert" className="error">
@@ -94,8 +94,8 @@ export default function CarForm({ car }) {
           type="text"
           name="avatar_url"
           ref={register}
-          {...register("avatar_url")}
-          aria-invalid={errors.avatar_url ? "true" : "false"}
+          {...register('avatar_url')}
+          aria-invalid={errors.avatar_url ? 'true' : 'false'}
         />
         {errors.avatar_url && (
           <label htmlFor="avatar_url" role="alert" className="error">
@@ -111,7 +111,7 @@ export default function CarForm({ car }) {
         <button type="reset" onClick={reset}>
           Reset
         </button>
-        <button type="submit" disabled={isSubmitting || (!isValid || !isDirty)}>
+        <button type="submit" disabled={isSubmitting || !isValid || !isDirty}>
           Submit
         </button>
       </div>

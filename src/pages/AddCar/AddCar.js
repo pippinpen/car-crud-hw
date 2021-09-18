@@ -8,7 +8,7 @@ function AddCar() {
     <MainLayout>
         <h1 style={{
           marginInlineStart: '15px',
-        }}>AddCar</h1>
+        }}>Add Car</h1>
         <ErrorBoundary>
           <CarForm />
         </ErrorBoundary>

@@ -1,5 +1,5 @@
-import React, { createContext, useState } from "react";
-import { useToasts } from "react-toast-notifications";
+import React, { createContext, useState } from 'react';
+import { useToasts } from 'react-toast-notifications';
 // import cloneDeep from 'lodash.cloneDeep' <-- use if your objects get complex
 
 export const CarsContext = createContext({
@@ -13,8 +13,6 @@ export const CarsContext = createContext({
   cars: [],
 });
 
-
-
 export const CarsProvider = (props) => {
   const [cars, setCars] = useState(() => {
     return JSON.parse(localStorage.getItem('cars')) || [];
@@ -25,7 +23,7 @@ export const CarsProvider = (props) => {
   // const [search, setSearch] = useState("");
   const { addToast } = useToasts();
 
-  const CARS_ENDPOINT = "https://carsapp2050.herokuapp.com/api/v1/cars/";
+  const CARS_ENDPOINT = 'https://carsapp2050.herokuapp.com/api/v1/cars/';
 
   const fetchCars = async () => {
     // console.log('loading', loading);
@@ -58,9 +56,9 @@ export const CarsProvider = (props) => {
     console.log('about to add', formData);
     try {
       const response = await fetch(CARS_ENDPOINT, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           // 'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: JSON.stringify(formData),
@@ -69,7 +67,7 @@ export const CarsProvider = (props) => {
         throw response;
       }
       const savedCar = await response.json();
-      console.log("got data", savedCar);
+      console.log('got data', savedCar);
       const newCars = [...cars, savedCar];
       localStorage.setItem('cars', JSON.stringify(newCars));
       setCars(newCars);
@@ -79,7 +77,7 @@ export const CarsProvider = (props) => {
     } catch (err) {
       console.log(err);
       addToast(`Error ${err.message || err.statusText}`, {
-        appearance: "error",
+        appearance: 'error',
       });
     }
   };
@@ -89,9 +87,9 @@ export const CarsProvider = (props) => {
     let updatedCar = null;
     try {
       const response = await fetch(`${CARS_ENDPOINT}${id}`, {
-        method: "PUT",
+        method: 'PUT',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           // 'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: JSON.stringify(updates),
@@ -101,7 +99,7 @@ export const CarsProvider = (props) => {
       }
       // Get index
       const index = cars.findIndex((car) => car._id === id);
-      console.log(index)
+      console.log(index);
 
       // Get actual car
       const oldCar = cars[index];
@@ -127,12 +125,9 @@ export const CarsProvider = (props) => {
       setCars(updatedCars);
     } catch (err) {
       console.log(err);
-      addToast(
-        `Error: Failed to update ${updatedCar.name}`,
-        {
-          appearance: "error",
-        }
-      );
+      addToast(`Error: Failed to update ${updatedCar.name}`, {
+        appearance: 'error',
+      });
     }
   };
 
@@ -140,9 +135,9 @@ export const CarsProvider = (props) => {
     let deletedCar = null;
     try {
       const response = await fetch(`${CARS_ENDPOINT}${id}`, {
-        method: "DELETE",
+        method: 'DELETE',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           // 'Content-Type': 'application/x-www-form-urlencoded',
         },
       });
@@ -162,12 +157,9 @@ export const CarsProvider = (props) => {
       // });
     } catch (err) {
       console.log(err);
-      addToast(
-        `Error: Failed to update ${deletedCar.name}`,
-        {
-          appearance: "error",
-        }
-      );
+      addToast(`Error: Failed to update ${deletedCar.name}`, {
+        appearance: 'error',
+      });
     }
   };
 
