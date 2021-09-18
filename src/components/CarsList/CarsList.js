@@ -15,7 +15,7 @@ function CarsList() {
 
   useEffect(() => {
     fetchCars();
-  }, [fetchCars]);
+  }, []);
 
   return (
     <section className="cars-list-section">
