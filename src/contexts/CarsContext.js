@@ -135,7 +135,7 @@ export const CarsProvider = (props) => {
       setCars(updatedCars);
     } catch (err) {
       console.log(err);
-      addToast(`Error: Failed to update ${oldCar.name}`, {
+      addToast(`Error: Failed to update ${oldCar ? oldCar?.name : id}`, {
         appearance: "error",
       });
     }
