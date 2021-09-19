@@ -13,11 +13,9 @@ export const CarsContext = createContext({
   cars: [],
 });
 
-
-
 export const CarsProvider = (props) => {
   const [cars, setCars] = useState(() => {
-    return JSON.parse(localStorage.getItem('cars')) || [];
+    return JSON.parse(localStorage.getItem("cars")) || [];
   });
   const [loading, setLoading] = useState(false);
   const [loaded, setLoaded] = useState(false);
@@ -32,16 +30,15 @@ export const CarsProvider = (props) => {
     // console.log('error', error);
     if (loading || loaded || error) {
       return;
-    } else {
-      setLoading(true);
     }
+    setLoading(true);
     try {
       const response = await fetch(CARS_ENDPOINT);
       if (response.status !== 200) {
         throw response;
       }
       const data = await response.json();
-      localStorage.setItem('cars', JSON.stringify(data));
+      localStorage.setItem("cars", JSON.stringify(data));
       setCars(data);
 
       // setLoading(false);
@@ -49,13 +46,13 @@ export const CarsProvider = (props) => {
     } catch (err) {
       setError(err.message || err.statusText);
     } finally {
-      setLoading(false);
       setLoaded(true);
+      setLoading(false);
     }
   };
 
   const addCar = async (formData) => {
-    console.log('about to add', formData);
+    console.log("about to add", formData);
     try {
       const response = await fetch(CARS_ENDPOINT, {
         method: "POST",
@@ -71,7 +68,7 @@ export const CarsProvider = (props) => {
       const savedCar = await response.json();
       console.log("got data", savedCar);
       const newCars = [...cars, savedCar];
-      localStorage.setItem('cars', JSON.stringify(newCars));
+      localStorage.setItem("cars", JSON.stringify(newCars));
       setCars(newCars);
       // addToast(`Saved ${savedCar.name}`, {
       //   appearance: "success",
@@ -85,25 +82,25 @@ export const CarsProvider = (props) => {
   };
 
   const updateCar = async (id, formData) => {
-    console.log('updating', id, formData);
+    console.log("updating", id, formData);
     let updatedCar = null;
-      // Get index
-      const index = cars.findIndex((car) => car._id === id);
-      console.log(index)
-      if (index === -1) throw new Error(`Car with index ${id} not found`);
-      // Get actual car
-      const oldCar = cars[index];
-      console.log('oldCar', oldCar);
+    // Get index
+    const index = cars.findIndex((car) => car._id === id);
+    console.log(index);
+    if (index === -1) throw new Error(`Car with index ${id} not found`);
+    // Get actual car
+    const oldCar = cars[index];
+    console.log("oldCar", oldCar);
 
-      // Send the differences, not the whole update
-      const updates = {};
+    // Send the differences, not the whole update
+    const updates = {};
 
-      for (const key of Object.keys(oldCar)) {
-        if (key === '_id') continue
-        if(oldCar[key] !== formData[key]) {
-          updates[key] = formData[key]
-        }
+    for (const key of Object.keys(oldCar)) {
+      if (key === "_id") continue;
+      if (oldCar[key] !== formData[key]) {
+        updates[key] = formData[key];
       }
+    }
 
     try {
       const response = await fetch(`${CARS_ENDPOINT}${id}`, {
@@ -124,26 +121,23 @@ export const CarsProvider = (props) => {
         ...oldCar,
         ...formData, // order here is important for the override!!
       };
-      console.log('updatedCar', updatedCar);
+      console.log("updatedCar", updatedCar);
       // recreate the cars array
       const updatedCars = [
         ...cars.slice(0, index),
         updatedCar,
         ...cars.slice(index + 1),
       ];
-      localStorage.setItem('cars', JSON.stringify(updatedCars));
+      localStorage.setItem("cars", JSON.stringify(updatedCars));
       // addToast(`Updated ${updatedCar.name}`, {
       //   appearance: "success",
       // });
       setCars(updatedCars);
     } catch (err) {
       console.log(err);
-      addToast(
-        `Error: Failed to update ${oldCar.name}`,
-        {
-          appearance: "error",
-        }
-      );
+      addToast(`Error: Failed to update ${oldCar.name}`, {
+        appearance: "error",
+      });
     }
   };
 
@@ -165,7 +159,7 @@ export const CarsProvider = (props) => {
       deletedCar = cars[index];
       // recreate the cars array without that car
       const updatedCars = [...cars.slice(0, index), ...cars.slice(index + 1)];
-      localStorage.setItem('cars', JSON.stringify(updatedCars));
+      localStorage.setItem("cars", JSON.stringify(updatedCars));
       setCars(updatedCars);
       console.log(`Deleted ${deletedCar.name}`);
       // addToast(`Deleted ${deletedCar.name}`, {
@@ -173,12 +167,9 @@ export const CarsProvider = (props) => {
       // });
     } catch (err) {
       console.log(err);
-      addToast(
-        `Error: Failed to update ${deletedCar.name}`,
-        {
-          appearance: "error",
-        }
-      );
+      addToast(`Error: Failed to update ${deletedCar.name}`, {
+        appearance: "error",
+      });
     }
   };
 
